@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="content-type">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+        <title> Blog</title>
+        <link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    </head>
+    <body  style="">
+        <div class="container">
+            <div>
+                <ul class="nav nav-tabs">
+                    <li> <a href='/main'>主页</a></li>
+                    <li><a href='/about'>关于</a></li>
+                    <li style = "margin-right:10px"><a href="/write/article" >写博客</a></li>
+                </ul>
+            </div>
+            <% var userName %>
+            <% if ( userName ) { %>
+                <div align="right">
+                    <em style="margin-right:10px">你好 <span style="color:red"<%= userName %></span> !</em>
+                     <a  align="right" href="/logout"> 退出</a>
+                </div>
+            <% } %>
+
+

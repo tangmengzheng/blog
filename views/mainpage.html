@@ -1,0 +1,17 @@
+<%- include header.html  %> 
+<div>
+    <h2 align="center">Blogs</h2>
+    <div style="margin-top:1cm">
+        <ul>
+            <%  for (var article in articles) { %>
+            <li>
+                <a href = "/article/<%= articles[article].a_id %>" ><%= articles[article].a_title %> </a>
+                --------------------------------------
+                <span><a href = "/edit/<%= articles[article].a_id %>"> 编辑</a></span> 
+                <span><a href = "/delete/article/<%= articles[article].a_id %>">删除</a></span>
+            </li>
+            <% } %>
+        </ul>
+    <div>
+</div>
+<%- include footer.html %>

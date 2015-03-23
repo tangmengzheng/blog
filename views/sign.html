@@ -1,0 +1,44 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="content-type">
+	<title>a form test</title>
+	<script>
+	</script>
+	<style>
+	.fo {
+		margin-bottom:20px
+		};
+    div{
+        margin-top:20px
+    };
+	</style>
+</head>
+<body>
+<div style="padding-top:50px;margin-bottom:100px">
+    <h1 align="center">注册</h1>
+</div>
+
+<div align="center" style="color:blue;font-size:20px">
+	<form method="post" action="/test">
+        <div>
+	    	用户名:<input type="text" id="name" class="fo"/><br/>
+	    	邮  箱:<input type="text" class="fo"/><br/>
+	    	密  码:<input type="password" class="fo"/><br/>
+	    	性  别:<select name="sex" class="fo">
+	    			<option value="male">男</option>
+	    			<option value="female">女</option>
+	    		</select class="fo"><br/>
+	    		 国家：<input type="radio" name="ctry">中国</input>
+	    		 <input type="radio" name="ctry">美国</input></br>
+	    		 业余兴趣：<input class="fo" type="checkbox">足球</input> 
+	    		 <input type="checkbox">篮球</input> 
+	    		 <input type="checkbox">乒乓球</input> <br/>
+        </div>
+        <div>
+	        <input type="submit" value=" 提交"/>
+       </div>
+    </form>
+</div>
+</body>
+</html>

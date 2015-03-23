@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="content-type">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    </head>
+    <body >
+        <div class="container">
+            <div style="padding-top:50px">
+                <h1 align="center">登录</h1>
+            </div>
+            <div class="row" style="margin:2cm;padding-bottom:2cm">
+                <div class="col-sm-3"></div>
+                <form class="form-horizontal col-sm-8" action = "/login" method = "POST"> 
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"> 用户名:</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" name = "name"  type="text" id="name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"> 密&nbsp&nbsp&nbsp&nbsp码:</label>
+                        <div class="col-sm-6">
+                            <input class="form-control"type="password" name = "password" id="password" />
+                        </div>
+                    </div>
+                    <div class="form-goup">
+                        <div class="col-sm-2"></div>
+                        <input type="submit" value="登录" />
+                    </div>
+
+                </form>
+            </div> 
+        </div>
+    </body>
+</html>
