@@ -12,7 +12,7 @@ var article=require('../module/article');
                     console.log(err);
                     return;
                 }
-                res.render('article' ,{article:article});
+                res.render('article' ,{article:article ,user:req.session.userId});
             });
         });
         app.get('/edit/:a_id', function (req, res) {
@@ -22,7 +22,7 @@ var article=require('../module/article');
                     console.log(err);
                     return;
                 }
-                res.render('edit' ,{article:article});
+                res.render('edit' ,{article:article ,user: req.session.userId});
             });
         });
 

@@ -2,16 +2,17 @@
 <div>
     <h2 align="center">Blogs</h2>
     <div style="margin-top:1cm">
-        <ul>
+		<table class = "table table-hover">
             <%  for (var article in articles) { %>
-            <li>
-                <a href = "/article/<%= articles[article].a_id %>" ><%= articles[article].a_title %> </a>
-                --------------------------------------
-                <span><a href = "/edit/<%= articles[article].a_id %>"> 编辑</a></span> 
-                <span><a href = "/delete/article/<%= articles[article].a_id %>">删除</a></span>
-            </li>
+			<tbody>
+				<tr>
+					<td class = "col-sm-10"><a href = "/article/<%= articles[article].a_id %>" ><%= articles[article].a_title %> </a></td>
+					<td><a href = "/edit/<%= articles[article].a_id %>"> 编辑</a></span> 
+					<td><a href = "/delete/article/<%= articles[article].a_id %>">删除</a></td>
+				</tr>
+			<tbody>
             <% } %>
-        </ul>
+		</table>
     <div>
 </div>
 <%- include footer.html %>

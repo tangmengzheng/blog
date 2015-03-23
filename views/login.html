@@ -5,32 +5,35 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     </head>
-    <body >
+    <body>
         <div class="container">
-            <div style="padding-top:50px">
-                <h1 align="center">登录</h1>
-            </div>
-            <div class="row" style="margin:2cm;padding-bottom:2cm">
-                <div class="col-sm-3"></div>
-                <form class="form-horizontal col-sm-8" action = "/login" method = "POST"> 
+            <div class="row" style="margin:2cm;padding-top:50px;padding-bottom:2cm">
+                <div class="col-sm-4"></div>
+                <form class="form-horizontal col-sm-6" method = "POST" action="/login"> 
+					<div class = "form-group" >
+						<div class = "col-sm-3"></div>
+						<h1 class = "col-sm-6">登录</h1>
+					</div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label"> 用户名:</label>
                         <div class="col-sm-6">
-                            <input class="form-control" name = "name"  type="text" id="name" />
+                            <input class="form-control" type="text" name ="name"  id ="name"></input>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label"> 密&nbsp&nbsp&nbsp&nbsp码:</label>
                         <div class="col-sm-6">
-                            <input class="form-control"type="password" name = "password" id="password" />
+                            <input class="form-control" type = "password" id ="password" name ="password"></input>
                         </div>
                     </div>
-                    <div class="form-goup">
+                    <div class="form-goup" style = "margin-top:1cm">
                         <div class="col-sm-2"></div>
-                        <input type="submit" value="登录" />
+                        <button  type = "button " class = "btn btn-success col-sm-2" value=" 注&nbsp&nbsp册" on-click = "/sign">注&nbsp&nbsp册</button>
+						<div class = "col-sm-1"></div>
+                        <button type="submit" class = "btn btn-success col-sm-2" value=" 登&nbsp&nbsp录"/>登&nbsp&nbsp录</button>
                     </div>
-
                 </form>
+
             </div> 
         </div>
     </body>

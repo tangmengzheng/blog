@@ -7,13 +7,17 @@ var article=require('../module/article');
 module.exports=function(app){
     /* GET home page. */
     app.get('/', function(req, res) {
-        res.render('mainpage');
+        res.redirect('/main');
     });
-    app.get('/sign',function(req,res){
+    app.get('/sign',function(req, res){
         res.render('sign');
     });
     app.post('/sign',function(req,res){
     });
+	app.get('/logout', function (req, res) {
+		req.session.userId = null;
+		res.redirect('/main');
+	});
     app.get('/main',function(req,res){
         var userId;
         if(!req.session.userId){
@@ -24,17 +28,17 @@ module.exports=function(app){
         article.getArticles(userId, function (err,articles) {
             if(err){
                 console.log(err);
-                res.render('mainpage', {articles:articles});
+                res.render('mainpage', {articles:articles,user:req.session.userId});
             }
-            res.render('mainpage', {articles: articles});
+            res.render('mainpage', {articles: articles, user: req.session.userId});
         });
     });
     app.get('/write/article/', function(req, res) {
-        res.render('edit',{article:null});
+        res.render('edit',{article:null ,user: req.session.userId});
     });
 
     app.get('/about',function(req,res){
-        res.render('about');
+        res.render('about',{user:req.session.userId});
     });
 
 }
