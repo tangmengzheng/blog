@@ -43,7 +43,6 @@
     }
 
     article.rePost = function (args,callback) {
-        console.log(util.inspect(args));
         var sql = 'update  article set a_title = ?, a_content = ? where a_id = ?';
         db.exec({
             sql:sql,

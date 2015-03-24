@@ -9,7 +9,12 @@ var article=require('../module/article');
             res.render('login');
         });
 
-        app.post('/login',function(req,res){
+        app.get('/logout', function (req, res) {
+            req.session.userId = null;
+            res.redirect('/main');
+        });
+
+        app.post('/login',function(req, res){
             var userName=req.body.name;
             var password=req.body.password;
 
@@ -29,17 +34,16 @@ var article=require('../module/article');
                     res.status(400).send("system busy");
                     return;
                 }
-                console.log("the data is :",util.inspect(data));
                 if(!data||data.u_pwd!=password){
                     console.log("userName or password fault");
 
                     res.status(400).send("userName or password fault");
                     return;
                 }
-                var userId=data.u_id; 
-                req.session.userId=data.u_id;
-                res.cookie('userId',userId);
-                res.cookie('userName',userName);
+                var userId = data.u_id; 
+                req.session.userId = userId;
+                res.cookie('userId', userId);
+                res.cookie('userName', userName);
                 res.redirect('/main');
             });
 

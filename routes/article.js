@@ -1,6 +1,5 @@
 (function () {
 var Path=require('path');
-var Login=require('../module/login');
 var util=require('util');
 var article=require('../module/article');
 
@@ -83,7 +82,6 @@ var article=require('../module/article');
 
             var params = {articleId : articleId, articleTitle : articleTitle, articleContent : articleContent };
 
-            console.log("the params is : "+ util.inspect(params));
 
             article.rePost(params, function (err,respData) {
                 if (err) {
@@ -111,7 +109,6 @@ var article=require('../module/article');
 
             var params = {articleId : articleId };
 
-            console.log("the params is : "+ util.inspect(params));
 
             article.delet(params, function (err,respData) {
                 if (err) {

@@ -14,10 +14,6 @@ module.exports=function(app){
     });
     app.post('/sign',function(req,res){
     });
-	app.get('/logout', function (req, res) {
-		req.session.userId = null;
-		res.redirect('/main');
-	});
     app.get('/main',function(req,res){
         var userId;
         if(!req.session.userId){

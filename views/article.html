@@ -1,12 +1,20 @@
 <%- include  header.html %>
 <div>
-    <div>
-        <h3 align="center"><%= article.a_title %></h3>
+
+    <div align = "right">
+        <a href = "/edit/<%= article.a_id %>" style = "margin:10px">编辑</a>
+        <a href = "/delete/article/<%= article.a_id %>" style = "margin:10px">删除</a>
     </div>
-    <div style="margsin-top:1cm">
-        <p>
-        <%- article.a_content %>
-        </p>
+
+    <div>
+        <h3 align="center" style = "margin-top:1cm"><%= article.a_title %></h3>
+    </div>
+    <div style="margin-top:1cm" class = "row">
+        <div class = "col-sm-1"></div>
+        <div class = "col-sm-10">
+            <%- article.a_content %>
+        </div>
+        <div class = "col-sm-1"></div>
     </div>
 </div>
 <% include footer.html %>
