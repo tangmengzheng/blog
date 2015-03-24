@@ -7,57 +7,57 @@
 
 	<title>sign up</title>
 </head>
-<body>
-	<div class = "container">
-		<div class = "row" align="center" style="padding-top:50px;margin-bottom:100px;color:blue;font-size:20px">
-			<div class = "col-sm-3"></div>
+    <body>
+        <div class = "container">
+            <div class="row" style="margin:2cm;padding-top:50px;padding-bottom:2cm">
+                <div class = "col-sm-4"></div>
 
-			<form class ="form-horizontal col-sm-6" method="post" action="/sign">
-				<div class = "form-group">
-					<div class = "col-sm-2"></div>
-					<h2 class = "col-sm-6">注册</h2>
-				</div>
+                <form class ="form-horizontal col-sm-6" method="post" action="/sign">
+                    <div class = "form-group">
+                        <div class = "col-sm-3"></div>
+                        <h2 class = "col-sm-6">注&nbsp&nbsp&nbsp&nbsp册</h2>
+                    </div>
 
-				<div class = "form-group">
-					<label class = "col-sm-2 control-label"> 用户名:</label>
-					<div class= "col-sm-6">
-						<input type="text" name="name" id="name" class="form-control"/>
-					</div>
-				</div>
+                    <div class = "form-group">
+                        <label class = "col-sm-2 control-label"> 用户名:</label>
+                        <div class= "col-sm-6">
+                            <input type="text" name="name" id="name" class="form-control"/>
+                        </div>
+                    </div>
 
-				<div class = "form-group">
-					<label class = "col-sm-2 control-label">邮&nbsp&nbsp&nbsp&nbsp箱:</label>
-					<div class="col-sm-6">
-						<input type="text" name= "email" class = "form-control"/>
-					</div>
-				</div>
+                    <div class = "form-group">
+                        <label class = "col-sm-2 control-label">邮&nbsp&nbsp&nbsp&nbsp箱:</label>
+                        <div class="col-sm-6">
+                            <input type="text" name= "email" class = "form-control"/>
+                        </div>
+                    </div>
 
-				<div class = "form-group">
-					<label class = "col-sm-2 control-label">密&nbsp&nbsp&nbsp&nbsp码:</label>
-					<div class = "col-sm-6">
-						<input type="password" name = "password"  class="form-control"/>
-					</div>
-				</div>
+                    <div class = "form-group">
+                        <label class = "col-sm-2 control-label">密&nbsp&nbsp&nbsp&nbsp码:</label>
+                        <div class = "col-sm-6">
+                            <input type="password" name = "password"  class="form-control"/>
+                        </div>
+                    </div>
 
-				<div class = "form-group">
-					<label class = "col-sm-2 control-label"> 性&nbsp&nbsp&nbsp&nbsp别:</label>
-					<div class = "col-sm-6">
-						<select name="sex" class="form-control">
-							<option value="male">男</option>
-							<option value="female">女</option>
-						</select>
-					</div>
-				</div>
+                    <div class = "form-group">
+                        <label class = "col-sm-2 control-label"> 性&nbsp&nbsp&nbsp&nbsp别:</label>
+                        <div class = "col-sm-6">
+                            <select name="sex" class="form-control">
+                                <option value="male">男</option>
+                                <option value="female">女</option>
+                            </select>
+                        </div>
+                    </div>
 
-				<div class = "form-group">
-					<div class = "col-sm-2"></div>
-					<div class = "col-sm-6">
-						<input type = "button" class = "btn btn-success" value = "登录" href = "/login" />
-						<input type = "submit" class = "btn btn-success" value = "注册"/>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-</body>
+                    <div class = "form-group">
+                        <div class = "col-sm-3"></div>
+                        <div class = "col-sm-6">
+                            <input type = "button" class = "btn btn-success" value = "登录" style = "margin-right:20px"  onclick = "/login" />
+                            <input type = "submit" class = "btn btn-success" value = "注册"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
 </html>
