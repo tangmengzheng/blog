@@ -16,6 +16,7 @@ create table article(
     a_title varchar(100) not null,
     a_content text not null,
     u_id int not null,
+    status int default 0,
     create_time timestamp default current_timestamp,
     constraint article_pk primary key(a_id),
     constraint article_user_fk foreign key(u_id) references user(u_id)

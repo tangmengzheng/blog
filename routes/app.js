@@ -13,6 +13,34 @@ module.exports=function(app){
         res.render('sign');
     });
     app.post('/sign',function(req,res){
+        var userName = req.body.name;
+        var password = req.body.password;
+        var email = req.body.email;
+
+        if (!userName || !userName.length){
+            res.status(400).send("invalid user name");
+            return;
+        }
+        if (!password || !password.length){
+            res.status(400).send("invalid pass word");
+            return;
+        }
+
+        if (!email || !email.length) {
+            res.status(400).send("invalid email");
+            return;
+        }
+
+        var params={'userName': userName,'password': password, 'email': email };
+        Login.sign(params,function(err,data){
+            if(err){
+                console.log(err);
+                res.status(400).send("system busy");
+                return;
+            }
+            res.redirect('/main');
+        });
+
     });
     app.get('/main',function(req,res){
         var userId;
