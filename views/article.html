@@ -1,10 +1,11 @@
 <%- include  header.html %>
 <div>
-
-    <div align = "right">
-        <a href = "/edit/<%= article.a_id %>" style = "margin:10px">编辑</a>
-        <a href = "/delete/article/<%= article.a_id %>" style = "margin:10px">删除</a>
-    </div>
+    <% if (user && user == article.u_id) { %>
+        <div align = "right">
+            <a href = "/edit/<%= article.a_id %>" style = "margin:10px">编辑</a>
+            <a href = "/delete/article/<%= article.a_id %>" style = "margin:10px">删除</a>
+        </div>
+    <% } %>
 
     <div>
         <h3 align="center" style = "margin-top:1cm"><%= article.a_title %></h3>

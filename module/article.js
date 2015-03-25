@@ -14,7 +14,7 @@
         });
     }
     article.getArticle = function(args, callback){
-        var sql='select a_id, a_title,a_content,create_time from article where a_id=?';
+        var sql='select a_id, a_title,a_content,u_id,create_time from article where a_id=?';
         db.exec({
             sql:sql,
             args:args
