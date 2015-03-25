@@ -8,33 +8,42 @@
     <body>
         <div class="container">
             <div class="row" style="margin:2cm;padding-top:50px;padding-bottom:2cm">
-                <div class="col-sm-4"></div>
+                <div class="col-sm-3"></div>
                 <form class="form-horizontal col-sm-6" method = "POST" action="/login"> 
 					<div class = "form-group" >
-						<div class = "col-sm-3"></div>
-						<h1 class = "col-sm-6">登&nbsp&nbsp&nbsp&nbsp录</h1>
+						<div class = "col-sm-4"></div>
+						<h1 class = "col-sm-4">登&nbsp&nbsp&nbsp&nbsp录</h1>
 					</div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label"> 用户名:</label>
+                        <label class="col-sm-3 control-label"> 用户名:</label>
                         <div class="col-sm-6">
                             <input class="form-control" type="text" name ="name"  id ="name"></input>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label"> 密&nbsp&nbsp&nbsp&nbsp码:</label>
+                        <label class="col-sm-3 control-label"> 密&nbsp&nbsp&nbsp&nbsp码:</label>
                         <div class="col-sm-6">
                             <input class="form-control" type = "password" id ="password" name ="password"></input>
                         </div>
                     </div>
                     <div class="form-goup" style = "margin-top:1cm">
-                        <div class="col-sm-2"></div>
-                        <a type = "button " class = "btn btn-success col-sm-2" value=" 注&nbsp&nbsp册" href = "/sign">注&nbsp&nbsp&nbsp&nbsp册</a>
-						<div class = "col-sm-2"></div>
-                        <button type="submit" class = "btn btn-success col-sm-2" value=" 登&nbsp&nbsp录"/>登&nbsp&nbsp&nbsp&nbsp录</button>
+                        <div class="col-sm-3 col-xs-3"></div>
+                        <a type = "button " class = "btn btn-success col-sm-2 col-xs-2" value=" 注册" href = "/sign">注册</a>
+						<div class = "col-sm-2 col-xs-2"></div>
+                        <button type="submit" class = "btn btn-success col-sm-2 col-xs-2" value=" 登&nbsp&nbsp录"/>登录</button>
                     </div>
                 </form>
-
             </div> 
+				<% if (error) { %> 
+					<div align = "center">
+						<p style = "color:red"> <%= error %></p>
+					</div>
+				<% } %>
+				<% if (success) { %> 
+					<div align= "center">
+						<p style = "color:blue"> <%= success %></p>
+					</div>
+				<% } %>
         </div>
     </body>
 </html>

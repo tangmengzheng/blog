@@ -30,7 +30,7 @@
         var sql = 'insert into article(a_title,a_content,u_id) values (?,?,?)';
         db.exec({
             sql:sql,
-            args:[args.articleTitle, args.articleContent, args.userId],
+            args:[args.articleTitle, args.articleContent, args.user],
         },function (err, data) {
             if(err) {
                 console.log(err);

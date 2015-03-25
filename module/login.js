@@ -6,7 +6,7 @@ self.login=function(args,callback){
     var sql='select u_id,u_pwd from user where u_name=?';
     db.exec({
         'sql':sql,
-        'args':args.userName
+        'args':args.name
     },function(err,data){
         if(err){
             callback(err,null);

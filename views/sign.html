@@ -10,60 +10,58 @@
     <body>
         <div class = "container">
             <div class="row" style="margin:2cm;padding-top:50px;padding-bottom:2cm">
-                <div class = "col-sm-4"></div>
+                <div class = "col-sm-2"></div>
 
-                <form class ="form-horizontal col-sm-6" method="post" action="/sign">
+                <form class ="form-horizontal col-sm-8" method="post" action="/sign">
                     <div class = "form-group">
-                        <div class = "col-sm-5"></div>
-                        <h2 class = "col-sm-7">注&nbsp&nbsp&nbsp&nbsp册</h2>
+                        <div class = "col-sm-3"></div>
+                        <h2 class = "col-sm-6" align = "center">注&nbsp&nbsp&nbsp&nbsp册</h2>
+						<div clas = "col-sm-3"></div>
                     </div>
 
                     <div class = "form-group">
-                        <label class = "col-sm-3 control-label"> 用户名:</label>
-                        <div class= "col-sm-8">
+                        <label class = "col-sm-3 control-label"> 用&nbsp&nbsp户&nbsp&nbsp名:</label>
+                        <div class= "col-sm-6">
                             <input type="text" name="name" id="name" class="form-control"/>
                         </div>
                     </div>
 
-                    <div class = "form-group">
-                        <label class = "col-sm-3 control-label">邮&nbsp&nbsp&nbsp&nbsp箱:</label>
-                        <div class="col-sm-8">
-                            <input type="text" name= "email" class = "form-control"/>
-                        </div>
-                    </div>
 
                     <div class = "form-group">
-                        <label class = "col-sm-3 control-label">密&nbsp&nbsp&nbsp&nbsp码:</label>
-                        <div class = "col-sm-8">
+                        <label class = "col-sm-3 control-label">密&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp码:</label>
+                        <div class = "col-sm-6">
                             <input type="password" name = "password"  class="form-control"/>
                         </div>
                     </div>
 
                     <div class = "form-group">
-                        <label class = "col-sm-3 control-label">确认密码:</label>
-                        <div class = "col-sm-8">
+                        <label class = "col-sm-3 control-label">密&nbsp码&nbsp确&nbsp认:</label>
+                        <div class = "col-sm-6">
                             <input type="password" name = "repass"  class="form-control"/>
                         </div>
                     </div>
 
                     <div class = "form-group">
-                        <label class = "col-sm-3 control-label"> 性&nbsp&nbsp&nbsp&nbsp别:</label>
-                        <div class = "col-sm-8">
-                            <select name="sex" class="form-control">
-                                <option value="male">男</option>
-                                <option value="female">女</option>
-                            </select>
+                        <label class = "col-sm-3 control-label">邮&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp箱:</label>
+                        <div class="col-sm-6">
+                            <input type="text" name= "email" class = "form-control"/>
                         </div>
                     </div>
 
-                    <div class = "form-group">
-                        <div class = "col-sm-5"></div>
-                        <div class = "col-sm-7">
-                            <a type = "button" class = "btn btn-success" value = "登录" style = "margin-right:20px"  href = "/login" />登&nbsp&nbsp&nbsp&nbsp录</a>
-                            <button type = "submit" class = "btn btn-success" value = "注册"/>注&nbsp&nbsp&nbsp&nbsp册</button>
-                        </div>
+                    <div class = "form-group" style = "margin-top:1cm">
+                        <div class = "col-sm-3 col-xs-3"></div>
+						<a type = "button" class = "btn btn-success col-sm-2 col-xs-2" value = "登录"  href = "/login" />登&nbsp&nbsp录</a>
+						<div class = "col-sm-2 col-xs-2"></div>
+						<button type = "submit" class = "btn btn-success col-sm-2 col-xs-2" value = "注册"/>注&nbsp&nbsp册</button>
+                        <div class = "col-sm-3 col-xs-3"></div>
                     </div>
                 </form>
+				<div class = "col-sm-2"></div>
+				<% if (error) { %>
+					<div >
+						<p  style = "color:red"><%= error %></p>
+					<div>
+				<% } %>
             </div>
         </div>
     </body>
