@@ -3,38 +3,91 @@
     <head>
         <meta content="text/html;charset=utf-8" http-equiv="content-type">
         <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>login</title>
+
         <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <script type = "text/javascript" src = "/js/jquery/jquery.min.js"></script>
     </head>
     <body>
+
+        <script type="text/javascript" src="/js/validation/jquery.validate.min.js"></script>
+        <script type = "text/javascript">
+            $(document).ready(function () {
+                $("#login").validate({
+                    rules: {
+                        name: {
+                            required: true
+                        },
+                        password: {
+                            required: true
+                        },
+                    },
+                    messages: {
+                        name: {
+                            required:"请输入用户名"
+                            },
+                        password: {
+                                required: "请输入密码"
+                        }
+                    }
+                 });
+
+             });
+        </script>
+
         <div class="container">
-            <div class="row" style="margin:2cm;padding-top:50px;padding-bottom:2cm">
-                <div class="col-sm-4"></div>
-                <form class="form-horizontal col-sm-6" method = "POST" action="/login"> 
+            <div class="row" style="margin-top:2cm">
+                <div class="col-sm-3"></div>
+                <form  id = "login" class="form-horizontal form-validation col-sm-6" method = "POST" action="/login"> 
 					<div class = "form-group" >
 						<div class = "col-sm-3"></div>
-						<h1 class = "col-sm-6">登&nbsp&nbsp&nbsp&nbsp录</h1>
+						<h1 class = "col-sm-6" align = "center">登&nbsp&nbsp&nbsp&nbsp录</h1>
+                        <div class = "col-sm-3"></div>
 					</div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label"> 用户名:</label>
+                        <label class="col-sm-3 control-label"> 用户名:</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="text" name ="name"  id ="name"></input>
+                            <input 
+                                id = "name"
+                                class = "form-control" 
+                                type = "text" 
+                                name = "name"  
+                                placeholder = "name">
+                            </input>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label"> 密&nbsp&nbsp&nbsp&nbsp码:</label>
+                        <label class="col-sm-3 control-label"> 密&nbsp&nbsp&nbsp&nbsp码:</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type = "password" id ="password" name ="password"></input>
+                            <input 
+                                id = "password"
+                                class = "form-control" 
+                                type = "password" 
+                                name ="password" 
+                                placeholder = "password">
+                            </input>
                         </div>
                     </div>
-                    <div class="form-goup" style = "margin-top:1cm">
-                        <div class="col-sm-2"></div>
-                        <a type = "button " class = "btn btn-success col-sm-2" value=" 注&nbsp&nbsp册" href = "/sign">注&nbsp&nbsp&nbsp&nbsp册</a>
-						<div class = "col-sm-2"></div>
-                        <button type="submit" class = "btn btn-success col-sm-2" value=" 登&nbsp&nbsp录"/>登&nbsp&nbsp&nbsp&nbsp录</button>
+                    <div class="form-group" style = "margin-top:1cm">
+                        <div class="col-sm-3 col-xs-0"></div>
+                        <a type = "button " class = "btn btn-success col-sm-2 col-xs-4" value=" 注册" href = "/sign">注册</a>
+						<div class = "col-sm-2 col-xs-4"></div>
+                        <button type="submit" class = "btn btn-success col-sm-2 col-xs-4" value=" 登录">登录</button>
+                        <div class="col-sm-3 col-xs-0"></div>
+                    </div>
+                    <div class = "form-group" style = "margin-top:1cm">
+                        <div class = "col-sm-12">
+                            <% if (error) { %> 
+                                <p style = "background-color:yellow;color:red"> <%= error %></p>
+                            <% } %>
+                            <% if (success) { %> 
+                                <p style = "background-color:yellow;color:blue"> <%= success %></p>
+                            <% } %>
+                        </div>
                     </div>
                 </form>
-
-            </div> 
+            </div>
         </div>
     </body>
 </html>

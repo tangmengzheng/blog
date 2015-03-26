@@ -11,7 +11,7 @@ var article=require('../module/article');
                     console.log(err);
                     return;
                 }
-                res.render('article' ,{article:article ,user:req.session.userId});
+                res.render('article' ,{article:article ,user:req.session.user});
             });
         });
         app.get('/edit/:a_id', function (req, res) {
@@ -21,19 +21,19 @@ var article=require('../module/article');
                     console.log(err);
                     return;
                 }
-                res.render('edit' ,{article:article ,user: req.session.userId});
+                res.render('edit' ,{article:article ,user: req.session.user});
             });
         });
 
         app.post('/post/article', function (req, res) {
-            var userId = req.session.userId;
+            var user = req.session.user;
             var articleTitle = req.body.title;
             var articleContent = req.body.content;
             
-            //userId is a number
-            if (!userId ) {
+            //user is a number
+            if (!user ) {
                 console.log("session is out of day");
-                return;
+                return res.redirect('/login');
             }
             if (!articleTitle || !articleTitle.length) {
                 console.log("the articleTitle is null") 
@@ -44,20 +44,20 @@ var article=require('../module/article');
                 return;
             }
 
-            var params = {userId : userId, articleTitle : articleTitle, articleContent : articleContent };
+            var params = {user : user, articleTitle : articleTitle, articleContent : articleContent };
 
             article.post(params, function (err,respData) {
                 if (err) {
                     console.log(err);
                     return;
                 }
-                res.redirect('/main');
+                res.redirect('/home');
             });
 
         });
         app.post('/post/article/:a_id', function (req, res) {
             var articleId = req.params.a_id;
-            var userId = req.session.userId;
+            var user = req.session.user;
             var articleTitle = req.body.title;
             var articleContent = req.body.content;
 
@@ -66,8 +66,8 @@ var article=require('../module/article');
                 return;
             }
             
-            //userId is a number
-            if (!userId ) {
+            //user is a number
+            if (!user ) {
                 console.log("session is out of day");
                 return;
             }
@@ -88,21 +88,21 @@ var article=require('../module/article');
                     console.log(err);
                     return;
                 }
-                res.redirect('/main');
+                res.redirect('/home');
             });
 
         });
         app.get('/delete/article/:a_id', function (req, res) {
             var articleId = req.params.a_id;
-            var userId = req.session.userId;
+            var user = req.session.user;
 
             if (!articleId) {
                 console.log("articleId is null");
                 return;
             }
             
-            //userId is a number
-            if (!userId ) {
+            //user is a number
+            if (!user ) {
                 console.log("session is out of day");
                 return;
             }
@@ -115,7 +115,7 @@ var article=require('../module/article');
                     console.log(err);
                     return;
                 }
-                res.redirect('/main');
+               return  res.redirect('/home');
             });
 
         });

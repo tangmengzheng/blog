@@ -7,62 +7,61 @@ var article=require('../module/article');
 module.exports=function(app){
     /* GET home page. */
     app.get('/', function(req, res) {
-        res.redirect('/main');
+        res.redirect('/home');
     });
     app.get('/sign',function(req, res){
-        res.render('sign');
+        res.render('sign',{ error: req.flash('error').toString() });
     });
     app.post('/sign',function(req,res){
-        var userName = req.body.name;
+        var name = req.body.name;
         var password = req.body.password;
         var email = req.body.email;
 
-        if (!userName || !userName.length){
-            res.status(400).send("invalid user name");
-            return;
+        if (!name || !name.length){
+            req.flash('error', "name is null");
+            return res.redirect('/sign');
         }
         if (!password || !password.length){
-            res.status(400).send("invalid pass word");
-            return;
+            req.flash('error', "password is null");
+            return res.redirect('/sign');
         }
 
         if (!email || !email.length) {
-            res.status(400).send("invalid email");
-            return;
+            req.flash('error', "email is null");
+            return res.redirect('/sign');
         }
 
-        var params={'userName': userName,'password': password, 'email': email };
+        var params={'name': name,'password': password, 'email': email };
         Login.sign(params,function(err,data){
             if(err){
-                console.log(err);
-                res.status(400).send("system busy");
-                return;
+                req.flash('error',"system busy");
+                return res.redirect('/sign');
             }
-            res.redirect('/main');
+            req.flash('success', "sign success, please login");
+            res.redirect('/login');
         });
 
     });
-    app.get('/main',function(req,res){
-        var userId;
-        if(!req.session.userId){
-            userId = 1;
+    app.get('/home',function(req,res){
+        var user;
+        if(!req.session.user){
+            user = 1;
         }else {
-            userId=req.session.userId;
+            user=req.session.user;
         }
-        article.getArticles(userId, function (err,articles) {
+        article.getArticles(user, function (err,articles) {
             if(err){
                 console.log(err);
-                res.render('mainpage', {articles:articles,user:req.session.userId});
             }
-            res.render('mainpage', {articles: articles, user: req.session.userId});
+            res.render('home', {articles: articles, user: req.session.user});
         });
     });
     app.get('/write/article/', function(req, res) {
-        res.render('edit',{article:null ,user: req.session.userId});
+        res.render('edit',{article:null ,user: req.session.user});
     });
 
     app.get('/about',function(req,res){
-        res.render('about',{user:req.session.userId});
+        res.render('about',{user:req.session.user});
     });
 
 }
