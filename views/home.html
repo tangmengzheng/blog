@@ -3,11 +3,12 @@
     <h2 align="center">Blogs</h2>
     <div style="margin-top:1cm">
 		<table class = "table table-hover">
-            <%  for (var article in articles) { %>
+            <%  for (var article in articles) { 
+                var  date = new Date(articles[article].create_time); %>
 			<tbody>
 				<tr>
 					<td class = "col-sm-10"><a href = "/article/<%= articles[article].a_id %>" ><%= articles[article].a_title %> </a></td>
-                    <td align = "right">time</td>
+                    <td align = "right"><%= date.getFullYear() %>.<%= date.getMonth() %>.<%= date.getDate() %></td>
 				</tr>
 			<tbody>
             <% } %>

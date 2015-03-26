@@ -9,7 +9,7 @@
 			var editor;
 			KindEditor.ready(function(K) {
 				editor = K.create('textarea[name="content"]', {
-					allowFileManager : false
+					allowFileManager : true
 				});
 				
 			});
@@ -24,7 +24,7 @@
                         },
                         content: {
                             required: true
-                        },
+                        }
                     },
                     messages: {
                         title: {
