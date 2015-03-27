@@ -1,8 +1,8 @@
 'use strict'
 var db = require('../lib/db').db();
 var util =require('util');
-var self={};
-self.login=function(args,callback){
+var user={};
+user.login=function(args,callback){
     var sql='select u_id,u_pwd from user where u_name=?';
     db.exec({
         'sql':sql,
@@ -15,7 +15,7 @@ self.login=function(args,callback){
         callback(null,data[0]);
     });
 }
-self.sign = function(args,callback){
+user.sign = function(args,callback){
     var sql='insert into user(u_name, u_pwd , u_email) values (?, ?, ? )';
     db.exec({
         'sql':sql,
@@ -28,4 +28,4 @@ self.sign = function(args,callback){
         callback(null, data);
     });
 }
-module.exports=self;
+module.exports=user;

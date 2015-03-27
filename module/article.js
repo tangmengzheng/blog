@@ -26,7 +26,7 @@
             callback(null,data[0]);
         });
     }
-    article.post = function (args,callback) {
+    article.postArticle = function (args,callback) {
         var sql = 'insert into article(a_title,a_content,u_id) values (?,?,?)';
         db.exec({
             sql:sql,
@@ -42,7 +42,7 @@
         });
     }
 
-    article.rePost = function (args,callback) {
+    article.rePostArticle = function (args,callback) {
         var sql = 'update  article set a_title = ?, a_content = ? where a_id = ?';
         db.exec({
             sql:sql,
@@ -57,7 +57,7 @@
             return;
         });
     }
-    article.delet = function (args,callback) {
+    article.deleteArticle = function (args,callback) {
         var sql = 'update  article set status = 1 where a_id = ?';
         db.exec({
             sql:sql,

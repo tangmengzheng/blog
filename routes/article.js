@@ -14,6 +14,9 @@ var article=require('../module/article');
                 res.render('article' ,{article:article ,user:req.session.user});
             });
         });
+        app.get('/write/article/', function(req, res) {
+            res.render('edit',{article:null ,user: req.session.user});
+        });
         app.get('/edit/:a_id', function (req, res) {
             var articleId=req.params.a_id;
             article.getArticle(articleId,function(err,article) {
@@ -46,7 +49,7 @@ var article=require('../module/article');
 
             var params = {user : user, articleTitle : articleTitle, articleContent : articleContent };
 
-            article.post(params, function (err,respData) {
+            article.postArticle(params, function (err,respData) {
                 if (err) {
                     console.log(err);
                     return;
@@ -83,7 +86,7 @@ var article=require('../module/article');
             var params = {articleId : articleId, articleTitle : articleTitle, articleContent : articleContent };
 
 
-            article.rePost(params, function (err,respData) {
+            article.rePostArticle(params, function (err,respData) {
                 if (err) {
                     console.log(err);
                     return;
@@ -110,7 +113,7 @@ var article=require('../module/article');
             var params = {articleId : articleId };
 
 
-            article.delet(params, function (err,respData) {
+            article.deleteArticle(params, function (err,respData) {
                 if (err) {
                     console.log(err);
                     return;
