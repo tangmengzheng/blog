@@ -11,10 +11,10 @@
         <div class="container">
             <div>
                 <ul class="nav nav-tabs">
-                    <li> <a href='/home'>主页</a></li>
+                    <li> <a href='/'>主页</a></li>
                     <li><a href='/about'>关于</a></li>
 					<% if (user) { %>
-						<li style = "margin-right:10px"><a href="/write/article" >写博客</a></li>
+					   	<li style = "margin-right:10px"><a href="/write/article" >写博客</a></li>
 						<li style = "margin-right:10px"><a href="/logout" > 退出</a></li>
 					<% }else { %>
 						<li style = "margin-right:10px"><a href="/login" >登录</a></li>

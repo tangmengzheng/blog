@@ -4,17 +4,22 @@
     var article = {};
 
     article.getArticles = function(args, callback){
-        var sql='select a_id,a_title,create_time from article where u_id=? and status = 0';
+        var sql='select a_id,a_title,create_time from article where and status = 0 order by create_time desc';
         db.exec({
             sql:sql,
             args:args
-        },function(err,data){
+        }, function(err, data){
+            if (err) {
+                callbacke(err, null);
+                return;
+            }
             callback(null,data);
             return ;
         });
     }
     article.getArticle = function(args, callback){
-        var sql='select a_id, a_title,a_content,u_id,create_time from article where a_id=?';
+        var articleSql = 'select a_id, a_read, a_favour, a_title,a_content,u_name, create_time from article where a_id=? ';
+        var commentSql = 'select c_id, c_ontent
         db.exec({
             sql:sql,
             args:args
@@ -27,7 +32,7 @@
         });
     }
     article.postArticle = function (args,callback) {
-        var sql = 'insert into article(a_title,a_content,u_id) values (?,?,?)';
+        var sql = 'insert into article(a_title,a_content,u_name) values (?,?,?)';
         db.exec({
             sql:sql,
             args:[args.articleTitle, args.articleContent, args.user],

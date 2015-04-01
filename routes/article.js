@@ -1,7 +1,8 @@
 (function () {
-var Path=require('path');
-var util=require('util');
-var article=require('../module/article');
+var Path = require('path');
+var util = require('util');
+var article = require('../module/article');
+var comment = require('../module/comment');
 
     module.exports=function(app){
         app.get('/article/:a_id',function(req, res){
@@ -11,9 +12,16 @@ var article=require('../module/article');
                     console.log(err);
                     return;
                 }
-                res.render('article' ,{article:article ,user:req.session.user});
+                comment.getComments(articleId, function(err, comments) {
+                    if (err) {
+                        console.log(err);
+                        return;
+                    }
+                    res.render('article' ,{article : article, comments : comments, user:req.session.user});
+                });
             });
         });
+
         app.get('/write/article/', function(req, res) {
             res.render('edit',{article:null ,user: req.session.user});
         });
@@ -54,7 +62,7 @@ var article=require('../module/article');
                     console.log(err);
                     return;
                 }
-                res.redirect('/home');
+                res.redirect('/');
             });
 
         });
@@ -91,7 +99,7 @@ var article=require('../module/article');
                     console.log(err);
                     return;
                 }
-                res.redirect('/home');
+                res.redirect('/');
             });
 
         });
@@ -118,7 +126,7 @@ var article=require('../module/article');
                     console.log(err);
                     return;
                 }
-               return  res.redirect('/home');
+               return  res.redirect('/');
             });
 
         });

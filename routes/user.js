@@ -1,7 +1,8 @@
 (function () {
 var path = require('path');
-var user = require('../module/user');
+var User = require('../module/user');
 var util = require('util');
+var crypto = require('crypto');
 
     module.exports=function(app){
 
@@ -12,8 +13,8 @@ var util = require('util');
 				});
         });
         app.post('/login',function(req, res){
-            var name=req.body.name;
-            var password=req.body.password;
+            var name = req.body.name;
+            var password = req.body.password;
 
             if(!name|| name.length===0){
 				req.flash('error', "name is null");
@@ -24,24 +25,24 @@ var util = require('util');
 				return res.redirect('/login');
             }
 
-            var params={'name': name,'password':password};
-            user.login(params,function(err,data){
+            var md5 = crypto.createHash('md5');
+            password = md5.update(password).digest('base64');
+
+            var params={'name': name};
+            User.login(params,function(err,data){
                 if(err){
                     console.log(err);
                     req.flash('error', "system busy");
 					return res.redirect('/login');
                 }
-                if(!data||data.u_pwd!=password){
+                if(!data || data.u_pwd!=password){
                     console.log("name or password fault");
-
                     req.flash('error', "name or password fault");
 					return res.redirect('/login');
                 }
-                var user = data.u_id; 
-                req.session.user = user;
-                res.cookie('user', user);
-                res.cookie('name', name);
-                res.redirect('/home');
+                req.session.user = name;
+                res.cookie('user', name);
+                res.redirect('/');
             });
 
         });
@@ -68,8 +69,12 @@ var util = require('util');
                 return res.redirect('/sign');
             }
 
+            var md5 = crypto.createHash('md5');
+            password = md5.update(password).digest('base64');
+            console.log("the password is" + password);
+
             var params={'name': name,'password': password, 'email': email };
-            user.sign(params,function(err,data){
+            User.sign(params,function(err,data){
                 if(err){
                     req.flash('error',"system busy");
                     return res.redirect('/sign');
@@ -82,7 +87,7 @@ var util = require('util');
 
         app.get('/logout', function (req, res) {
             req.session.user = null;
-            res.redirect('/home');
+            res.redirect('/');
         });
 
     }
