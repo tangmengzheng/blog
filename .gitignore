@@ -3,7 +3,7 @@ logs
 *.log
 #vi cache
 .*.swp
- dump.rdb
+dump.rdb
 
 # Runtime data
 pids
