@@ -15,7 +15,7 @@ create table article(
     a_id int auto_increment,
     a_title varchar(128) not null,
     a_content text not null,
-    u_name varchar(128) unique not null,
+    u_name varchar(128) not null,
     a_status int default 0,
     a_read int default 0,
     a_favour int default 0,

@@ -8,24 +8,20 @@ var formidable = require('formidable');
 module.exports=function(app){
     /* GET home page. */
     app.get('/', function(req, res) {
-        var user;
+        var user = 'root';
+        /*
         if(!req.session.user){
             user = 'root';
         }else {
             user = req.session.user;
         }
+        */
         article.getArticles(user, function (err,articles) {
             if(err){
                 console.log(err);
             }
             res.render('home', {articles: articles, user: req.session.user});
         });
-    });
-    app.get('/write/article/', function(req, res) {
-        res.render('edit',{article:null ,user: req.session.user});
-    });
-    app.get('/sign',function(req, res){
-        res.render('sign',{ error: req.flash('error').toString() });
     });
 
     app.get('/about', function(req, res) {

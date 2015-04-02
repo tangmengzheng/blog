@@ -14,30 +14,6 @@
 			<tbody>
             <% } %>
 		</table>
-        <div>
-            <span> 阅读（</span><%= article.a_read %><span>）</span>
-            <span><a href ='/favour/<%= article.a_id %>'> 赞</a> （</span><%= article.a_favour %><span> ）</span>
-        </div>
-
-        <% if (comments) { %>
-            <div>
-                <%  for (var key in comments) { %>
-                    <hr/>
-                    <div>
-                        <p class = ""> <%= comments[key].u_name] %> </p>
-                        <p class = ""><%= comments[key].c_content %> </p>
-                    </div>
-                <% } %>
-            </div>
-        <% } %>
-        <div>
-            <form class = "form" action ="/post/comments" method = "POST">
-                <textarea  name = "content">
-
-                </textarea>
-                <button type = "submit" value = "提交">提交 </button>
-            </form>
-        </div>
     <div>
 </div>
 <%- include footer.html %>

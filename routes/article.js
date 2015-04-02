@@ -2,20 +2,33 @@
 var Path = require('path');
 var util = require('util');
 var article = require('../module/article');
-var comment = require('../module/comment');
+var extra = require('../module/extra');
 
     module.exports=function(app){
         app.get('/article/:a_id',function(req, res){
             var articleId=req.params.a_id;
+            if (!articleId) {
+                console.log('articleId is null');
+                return res.status(400).send('parame error');
+            }
+            extra.read({articleId:articleId}, function (err, data) {
+                if (err) {
+                    console.og(err);
+                    return;
+                }
+            });
+
             article.getArticle(articleId,function(err,article) {
                 if (err) {
                     console.log(err);
-                    return;
+                    return res.status(400).send('system busy');
                 }
-                comment.getComments(articleId, function(err, comments) {
+
+                var params = { articleId : articleId};
+                extra.getComments(params, function(err, comments) {
                     if (err) {
                         console.log(err);
-                        return;
+                        return res.status(400).send('system busy');
                     }
                     res.render('article' ,{article : article, comments : comments, user:req.session.user});
                 });
@@ -30,7 +43,7 @@ var comment = require('../module/comment');
             article.getArticle(articleId,function(err,article) {
                 if (err) {
                     console.log(err);
-                    return;
+                    return res.status(400).send('parame error');
                 }
                 res.render('edit' ,{article:article ,user: req.session.user});
             });
@@ -48,11 +61,11 @@ var comment = require('../module/comment');
             }
             if (!articleTitle || !articleTitle.length) {
                 console.log("the articleTitle is null") 
-                return;
+                return res.status(400).send('parame error');
             }
             if (!articleContent || !articleContent.length) {
                 console.log("the articleContent is null");
-                return;
+                return res.status(400).send('parame error');
             }
 
             var params = {user : user, articleTitle : articleTitle, articleContent : articleContent };
@@ -60,7 +73,7 @@ var comment = require('../module/comment');
             article.postArticle(params, function (err,respData) {
                 if (err) {
                     console.log(err);
-                    return;
+                    return res.status(400).send('system busy');
                 }
                 res.redirect('/');
             });
@@ -74,21 +87,21 @@ var comment = require('../module/comment');
 
             if (!articleId) {
                 console.log("articleId is null");
-                return;
+                return res.status(400).send('parame error');
             }
             
             //user is a number
             if (!user ) {
                 console.log("session is out of day");
-                return;
+                return res.status(400).send('parame error');
             }
             if (!articleTitle || !articleTitle.length) {
                 console.log("the articleTitle is null") 
-                return;
+                return res.status(400).send('parame error');
             }
             if (!articleContent || !articleContent.length) {
                 console.log("the articleContent is null");
-                return;
+                return res.status(400).send('parame error');
             }
 
             var params = {articleId : articleId, articleTitle : articleTitle, articleContent : articleContent };
@@ -97,7 +110,7 @@ var comment = require('../module/comment');
             article.rePostArticle(params, function (err,respData) {
                 if (err) {
                     console.log(err);
-                    return;
+                    return res.status(400).send('system busy');
                 }
                 res.redirect('/');
             });
@@ -109,13 +122,13 @@ var comment = require('../module/comment');
 
             if (!articleId) {
                 console.log("articleId is null");
-                return;
+                return res.status(400).send('parame error');
             }
             
             //user is a number
             if (!user ) {
                 console.log("session is out of day");
-                return;
+                return res.status(400).send('parame error');
             }
 
             var params = {articleId : articleId };
@@ -124,7 +137,7 @@ var comment = require('../module/comment');
             article.deleteArticle(params, function (err,respData) {
                 if (err) {
                     console.log(err);
-                    return;
+                    return res.status(400).send('system busy');
                 }
                return  res.redirect('/');
             });

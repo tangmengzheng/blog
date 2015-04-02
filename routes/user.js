@@ -4,10 +4,14 @@ var User = require('../module/user');
 var util = require('util');
 var crypto = require('crypto');
 
-    module.exports=function(app){
+    module.exports = function(app) {
 
         app.get('/login',function(req,res){
+            if (req.session.user) {
+                req.session.user = null;
+            }
             res.render('login',{
+                user:null,
 				error: req.flash('error').toString(),
 				success: req.flash('success').toString()
 				});
@@ -35,7 +39,7 @@ var crypto = require('crypto');
                     req.flash('error', "system busy");
 					return res.redirect('/login');
                 }
-                if(!data || data.u_pwd!=password){
+                if(!data[0] || data[0].u_pwd!=password){
                     console.log("name or password fault");
                     req.flash('error', "name or password fault");
 					return res.redirect('/login');
@@ -48,7 +52,13 @@ var crypto = require('crypto');
         });
 
         app.get('/sign',function(req, res){
-            res.render('sign',{ error: req.flash('error').toString() });
+            if (req.session.user) {
+                req.session.user = null;
+            }
+            res.render('sign',{
+                user : null,
+                error: req.flash('error').toString()
+            });
         });
         app.post('/sign',function(req,res){
             var name = req.body.name;
@@ -69,19 +79,33 @@ var crypto = require('crypto');
                 return res.redirect('/sign');
             }
 
-            var md5 = crypto.createHash('md5');
-            password = md5.update(password).digest('base64');
-            console.log("the password is" + password);
-
-            var params={'name': name,'password': password, 'email': email };
-            User.sign(params,function(err,data){
-                if(err){
-                    req.flash('error',"system busy");
+            var params = { user : name};
+            User.getUser(params, function (err, data) {
+                if (err) {
+                    console.log(err);
+                    return res.status(400).send('system error');
+                }
+                console.log('the data is '+ util.inspect(data[0]));
+                if (data[0].count > 0) {
+                    req.flash('error',"sorry, the name has already be signed"); 
                     return res.redirect('/sign');
                 }
-                req.flash('success', "sign success, please login");
-                res.redirect('/login');
+
+                var md5 = crypto.createHash('md5');
+                password = md5.update(password).digest('base64');
+
+                var params={'name': name,'password': password, 'email': email };
+
+                User.sign(params, function(err, data){
+                    if(err){
+                        req.flash('error', "system busy");
+                        return res.redirect('/sign');
+                    }
+                    req.flash('success', "sign success, please login");
+                    res.redirect('/login');
+                });
             });
+
 
         });
 

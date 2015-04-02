@@ -3,8 +3,8 @@
     var util = require('util');
     var article = {};
 
-    article.getArticles = function(args, callback){
-        var sql='select a_id,a_title,create_time from article where and status = 0 order by create_time desc';
+    article.getArticles = function (args, callback) {
+        var sql='select a_id,a_title,create_time from article where u_name = ? and a_status = 0 order by create_time desc';
         db.exec({
             sql:sql,
             args:args
@@ -19,9 +19,8 @@
     }
     article.getArticle = function(args, callback){
         var articleSql = 'select a_id, a_read, a_favour, a_title,a_content,u_name, create_time from article where a_id=? ';
-        var commentSql = 'select c_id, c_ontent
         db.exec({
-            sql:sql,
+            sql:articleSql,
             args:args
         },function(err,data){
             if(err){
