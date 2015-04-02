@@ -62,7 +62,7 @@
         });
     }
     article.deleteArticle = function (args,callback) {
-        var sql = 'update  article set status = 1 where a_id = ?';
+        var sql = 'update  article set a_status = 1 where a_id = ?';
         db.exec({
             sql:sql,
             args:[args.articleId],
