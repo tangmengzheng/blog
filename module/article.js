@@ -9,40 +9,38 @@
             sql:sql,
             args:args
         }, function(err, data){
-            if (err) {
-                callbacke(err, null);
-                return;
-            }
-            callback(null,data);
-            return ;
+            callback(err, data);
         });
     }
-    article.getArticle = function(args, callback){
+
+    article.getArticle = function(args, callback) {
         var articleSql = 'select a_id, a_read, a_favour, a_title,a_content,u_name, create_time from article where a_id=? ';
         db.exec({
             sql:articleSql,
             args:args
         },function(err,data){
-            if(err){
-                callback(err,nil);
-                return;
-            }
-            callback(null,data[0]);
+            callback(err,data[0]);
         });
     }
+
+    article.getArticleUser = function (args, callback) {
+        var sql = 'select u_name from article where a_id = ?';
+        db.exec({
+            sql : sql,
+            args : args.articleId
+        }, function (err, data) {
+            callback(err, data[0]); 
+        });
+
+    }
+
     article.postArticle = function (args,callback) {
         var sql = 'insert into article(a_title,a_content,u_name) values (?,?,?)';
         db.exec({
             sql:sql,
             args:[args.articleTitle, args.articleContent, args.user],
         },function (err, data) {
-            if(err) {
-                console.log(err);
-                callback(err,null);
-                return;
-            }
-            callback(null,data);
-            return;
+            callback(err, data);
         });
     }
 
@@ -52,13 +50,7 @@
             sql:sql,
             args:[args.articleTitle, args.articleContent, args.articleId],
         },function (err, data) {
-            if(err) {
-                console.log(err);
-                callback(err,null);
-                return;
-            }
-            callback(null,data);
-            return;
+            callback(err,data);
         });
     }
     article.deleteArticle = function (args,callback) {
@@ -67,13 +59,7 @@
             sql:sql,
             args:[args.articleId],
         },function (err, data) {
-            if(err) {
-                console.log(err);
-                callback(err,null);
-                return;
-            }
-            callback(null,data);
-            return;
+            callback(err,data);
         });
     }
 

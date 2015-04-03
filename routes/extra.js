@@ -27,7 +27,7 @@
         });
         app.post('/post/comment/:a_id', function (req, res) {
             var articleId = req.params.a_id;
-            var commentContent = req.body.content;
+            var commentContent = req.body.comment;
             if (!articleId || !articleId.length) {
                 return res.status(400).send('paramete error');
             }

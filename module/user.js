@@ -7,7 +7,7 @@ user.login=function(args, callback){
     db.exec({
         'sql':sql,
         'args':args.name
-    },function(err,data){ callback(err, data);});
+    },function(err,data){ callback(err, data[0]);});
 }
 user.sign = function(args, callback){
     var sql='insert into user(u_name, u_pwd , u_email) values (?, ?, ? )';

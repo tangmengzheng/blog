@@ -39,7 +39,7 @@ var crypto = require('crypto');
                     req.flash('error', "system busy");
 					return res.redirect('/login');
                 }
-                if(!data[0] || data[0].u_pwd!=password){
+                if(!data || data.u_pwd != password){
                     console.log("name or password fault");
                     req.flash('error', "name or password fault");
 					return res.redirect('/login');

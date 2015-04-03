@@ -36,17 +36,40 @@ var extra = require('../module/extra');
         });
 
         app.get('/write/article/', function(req, res) {
+            //非法请求 
+            if (!req.session.user) {
+                return res.render('404');
+            }
             res.render('edit',{article:null ,user: req.session.user});
         });
         app.get('/edit/:a_id', function (req, res) {
+
             var articleId=req.params.a_id;
-            article.getArticle(articleId,function(err,article) {
-                if (err) {
-                    console.log(err);
-                    return res.status(400).send('parame error');
-                }
-                res.render('edit' ,{article:article ,user: req.session.user});
-            });
+            if (!articleId || !articleId.length) {
+                return res.status(400).send("parame error");
+            }
+
+            //非法请求 
+            if (!req.session.user) {
+                return res.render('404');
+            }else {
+                article.getArticleUser({articleId : articleId}, function (err, data) {
+                    if (err) {
+                        console.log(err);
+                        res.status(400).send("system busy");
+                    }else if (data.u_name != req.session.user) {
+                        return res.render("404");
+                    }else {
+                        article.getArticle(articleId,function(err,article) {
+                            if (err) {
+                                console.log(err);
+                                return res.status(400).send('parame error');
+                            }
+                            res.render('edit' ,{article:article ,user: req.session.user});
+                        });
+                    }
+                });
+            }
         });
 
         app.post('/post/article', function (req, res) {
@@ -69,8 +92,7 @@ var extra = require('../module/extra');
             }
 
             var params = {user : user, articleTitle : articleTitle, articleContent : articleContent };
-
-            article.postArticle(params, function (err,respData) {
+            article.postArticle(params, function (err,data) {
                 if (err) {
                     console.log(err);
                     return res.status(400).send('system busy');
@@ -89,11 +111,9 @@ var extra = require('../module/extra');
                 console.log("articleId is null");
                 return res.status(400).send('parame error');
             }
-            
-            //user is a number
             if (!user ) {
                 console.log("session is out of day");
-                return res.status(400).send('parame error');
+                return res.redirect('/login');
             }
             if (!articleTitle || !articleTitle.length) {
                 console.log("the articleTitle is null") 
@@ -104,44 +124,58 @@ var extra = require('../module/extra');
                 return res.status(400).send('parame error');
             }
 
-            var params = {articleId : articleId, articleTitle : articleTitle, articleContent : articleContent };
-
-
-            article.rePostArticle(params, function (err,respData) {
+            article.getArticleUser({articleId:articleId}, function (err, data) {
                 if (err) {
                     console.log(err);
-                    return res.status(400).send('system busy');
-                }
-                res.redirect('/');
-            });
+                    return res.status(400).send("system busy");
+                }else if (data.u_name != req.session.user) {
+                    return res.render(404);
+                }else {
+                    var params = {articleId : articleId, articleTitle : articleTitle, articleContent : articleContent };
 
+                    article.rePostArticle(params, function (err,data) {
+                        if (err) {
+                            console.log(err);
+                            return res.status(400).send('system busy');
+                        }
+                        res.redirect('/');
+                    });
+                }
+            });
         });
+
         app.get('/delete/article/:a_id', function (req, res) {
+
             var articleId = req.params.a_id;
-            var user = req.session.user;
 
             if (!articleId) {
                 console.log("articleId is null");
                 return res.status(400).send('parame error');
             }
-            
-            //user is a number
-            if (!user ) {
-                console.log("session is out of day");
-                return res.status(400).send('parame error');
+
+            //非法请求 
+            if (!req.session.user) {
+                return res.render('404');
+            }else {
+                article.getArticleUser({articleId:articleId}, function (err, data) {
+                    if (err) {
+                        console.log(err);
+                        return res.status(400).send("system busy");
+                    }else if (data.u_name != req.session.user) {
+                        return res.render(404);
+                    }else {
+                        var params = {articleId : articleId };
+                        article.deleteArticle(params, function (err, data) {
+                            if (err) {
+                                console.log(err);
+                                return res.status(400).send('system busy');
+                            }
+                           return  res.redirect('/');
+                        });
+                    }
+                });
+
             }
-
-            var params = {articleId : articleId };
-
-
-            article.deleteArticle(params, function (err,respData) {
-                if (err) {
-                    console.log(err);
-                    return res.status(400).send('system busy');
-                }
-               return  res.redirect('/');
-            });
-
         });
     }
 })();
