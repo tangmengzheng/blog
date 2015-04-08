@@ -37,7 +37,7 @@ var extra = require('../module/extra');
 
         app.get('/write/article/', function(req, res) {
             //非法请求 
-            if (!req.session.user) {
+            if (!req.session.user || req.session.user != 'root') {
                 return res.render('404');
             }
             res.render('edit',{article:null ,user: req.session.user});
@@ -78,9 +78,9 @@ var extra = require('../module/extra');
             var articleContent = req.body.content;
             
             //user is a number
-            if (!user ) {
+            if (!user || user != 'root' ) {
                 console.log("session is out of day");
-                return res.redirect('/login');
+                return res.render('404');
             }
             if (!articleTitle || !articleTitle.length) {
                 console.log("the articleTitle is null") 
