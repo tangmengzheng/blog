@@ -51,6 +51,13 @@ module.exports=function(app){
 		res.sendFile(path.join(__dirname,'../public/upload/'+img));
 	});
 
+    app.get('/robots.txt', function (req, res ) {
+       res.sendFile(path.join(__dirname,"../public/robots.txt"));
+    });
+    app.get('/sitemap.xml', function (req, res ) {
+        res.sendFile(path.join(__dirname,"../public/sitemap.xml"));
+    });
+
 }
 
 })();
