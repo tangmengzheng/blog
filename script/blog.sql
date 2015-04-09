@@ -36,3 +36,14 @@ create table comment(
     constraint comment_user_fk foreign key(u_name) references user(u_name) on delete CASCADE
 )ENGINE = InnoDB default charset = utf8;
 
+DROP TABLE IF EXISTS favour;
+create table favour(
+    a_id int not null,
+    u_id int not null,
+    create_time timestamp default current_timestamp,
+    constraint favour_pk primary key (a_id, u_id),
+    constraint article_favour_fk foreign key (a_id) references article(a_id) ON DELETE CASCADE,
+    constraint user_favour_fk foreign key (u_id) references user(u_id) ON DELETE CASCADE
+)ENGINE = InnoDB default charset = utf8;
+
+

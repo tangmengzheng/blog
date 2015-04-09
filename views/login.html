@@ -2,6 +2,7 @@
 <%- include header.html %>
 <script type = "text/javascript">
     $(document).ready(function () {
+        captcha();
         $("#login").validate({
             rules: {
                 name: {
@@ -10,6 +11,9 @@
                 password: {
                     required: true
                 },
+                captcha: {
+                    required: true
+                }
             },
             messages: {
                 name: {
@@ -17,11 +21,24 @@
                     },
                 password: {
                         required: "请输入密码"
+                },
+                captcha: {
+                    required: "请输入验证码"
                 }
             }
          });
 
+        $("#capImg").click(function () {
+            captcha();
+            return false;
+        });
      });
+
+    function captcha () {
+        var url = '/captcha?timeStamp='+new Date().getTime();
+        $("#capImg").attr("src", url);
+    }
+
 </script>
     <div class="row" style="margin-top:1cm">
         <div class="col-sm-3"></div>
@@ -55,22 +72,39 @@
                     </input>
                 </div>
             </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">验证码:</label>
+                <div class="col-sm-4">
+                    <input 
+                        id = "captcha"
+                        class = "form-control" 
+                        type = "text" 
+                        name ="captcha" 
+                        placeholder = "六位数">
+                    </input>
+                </div>
+                <img id = "capImg" src = "#" style = "width:70px;height:40px"></img>
+            </div>
+
+            <div class = "form-group">
+                <label class="col-sm-3"></label>
+                <div class="col-sm-6">
+                    <% if (error) { %> 
+                        <p style = "color:red"> <%= error %></p>
+                    <% } %>
+                    <% if (success) { %> 
+                        <p style = "background-color:yellow;color:blue"> <%= success %></p>
+                    <% } %>
+                </div>
+            </div>
+
             <div class="form-group" style = "margin-top:1cm">
                 <div class="col-sm-3 col-xs-1"></div>
                 <a type = "button " class = "btn btn-info col-sm-2 col-xs-4" value=" 注册" href = "/sign">注册</a>
                 <div class = "col-sm-2 col-xs-2"></div>
                 <button type="submit" class = "btn btn-success col-sm-2 col-xs-4" value=" 登录">登录</button>
                 <div class="col-sm-3 col-xs-1"></div>
-            </div>
-            <div class = "form-group" style = "margin-top:1cm">
-                <div class = "col-sm-12">
-                    <% if (error) { %> 
-                        <p style = "background-color:yellow;color:red"> <%= error %></p>
-                    <% } %>
-                    <% if (success) { %> 
-                        <p style = "background-color:yellow;color:blue"> <%= success %></p>
-                    <% } %>
-                </div>
             </div>
         </form>
     </div>

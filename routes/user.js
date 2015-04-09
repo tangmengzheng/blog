@@ -10,23 +10,32 @@ var crypto = require('crypto');
             if (req.session.user) {
                 req.session.user = null;
             }
-            res.render('login',{
+            res.render('login', {
                 user:null,
 				error: req.flash('error').toString(),
 				success: req.flash('success').toString()
 				});
         });
-        app.post('/login',function(req, res){
+        app.post('/login',function(req, res) {
             var name = req.body.name;
             var password = req.body.password;
+            var captcha = req.body.captcha;
 
-            if(!name|| name.length===0){
+            if (!name || !name.length) {
 				req.flash('error', "name is null");
 				return res.redirect('/login');
             }
-            if(!password||password.length===0){
+            if (!password || !password.length) {
                 req.flash('error', "password is null");
 				return res.redirect('/login');
+            }
+            if (!captcha || !captcha.length) {
+                req.flash('error', "captcha is null");
+                return  res.redirect('/login');
+            }
+            if (captcha != req.session.captcha) {
+                req.flash('error', "captcha is fault");
+                return res.redirect('/login');
             }
 
             var md5 = crypto.createHash('md5');

@@ -77,19 +77,21 @@
             </div>
         </div>
 
+        <div class = "form-group">
+            <label class="col-sm-3"></label>
+            <div class="col-sm-6">
+                <% if (error) { %> 
+                    <p style = "color:red"> <%= error %></p>
+                <% } %>
+            </div>
+        </div>
+
         <div class = "form-group" style = "margin-top:1cm">
             <div class = "col-sm-3 col-xs-1"></div>
             <a type = "button" class = "btn btn-info col-sm-2 col-xs-4" value = "登录"  href = "/login" />登&nbsp&nbsp录</a>
             <div class = "col-sm-2 col-xs-2"></div>
             <button type = "submit" class = "btn btn-success col-sm-2 col-xs-4" value = "注册"/>注&nbsp&nbsp册</button>
             <div class = "col-sm-3 col-xs-1"></div>
-        </div>
-        <div class = "form-group" style = "margin-top:1cm">
-            <div class = "col-sm-12">
-                <% if (error) { %> 
-                    <p style = "background-color:yellow;color:red"> <%= error %></p>
-                <% } %>
-            </div>
         </div>
     </form>
 </div>

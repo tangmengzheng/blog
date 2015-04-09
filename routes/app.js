@@ -1,9 +1,9 @@
 (function () {
 var path=require('path');
-var User=require('../module/user');
 var util=require('util');
 var article=require('../module/article');
 var formidable = require('formidable');
+var Captcha = require('../lib/captcha');
 
 module.exports=function(app){
     /* GET home page. */
@@ -56,6 +56,16 @@ module.exports=function(app){
     });
     app.get('/sitemap.xml', function (req, res ) {
         res.sendFile(path.join(__dirname,"../public/sitemap.xml"));
+    });
+    app.get('/captcha', function (req, res) {
+        var arry = Captcha.getCaptcha();
+        if (!arry) {
+            res.send(null);
+            return;
+        }
+        req.session.captcha = arry[0];
+        res.send(arry[1]);
+        return;
     });
 
 }
