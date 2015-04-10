@@ -1,4 +1,4 @@
 User-Agent: *
 Allow:  /
-Allow:  /article/*
+Allow:  /article/
 Allow  /about

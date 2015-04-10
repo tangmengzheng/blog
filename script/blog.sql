@@ -8,8 +8,6 @@ create table user(
     constraint user_pk primary key(u_id)
 )ENGINE = InnoDB default charset = utf8;
 
-
-
 DROP TABLE IF EXISTS article;
 create table article(
     a_id int auto_increment,
@@ -39,11 +37,11 @@ create table comment(
 DROP TABLE IF EXISTS favour;
 create table favour(
     a_id int not null,
-    u_id int not null,
+    u_name varchar(126) not null,
     create_time timestamp default current_timestamp,
-    constraint favour_pk primary key (a_id, u_id),
+    constraint favour_pk primary key (a_id, u_name),
     constraint article_favour_fk foreign key (a_id) references article(a_id) ON DELETE CASCADE,
-    constraint user_favour_fk foreign key (u_id) references user(u_id) ON DELETE CASCADE
+    constraint user_favour_fk foreign key (u_name) references user(u_name) ON DELETE CASCADE
 )ENGINE = InnoDB default charset = utf8;
 
 

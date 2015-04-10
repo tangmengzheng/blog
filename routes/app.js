@@ -67,7 +67,6 @@ module.exports=function(app){
         res.send(arry[1]);
         return;
     });
-
 }
 
 })();

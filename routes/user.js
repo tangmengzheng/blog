@@ -120,6 +120,7 @@ var crypto = require('crypto');
 
         app.get('/logout', function (req, res) {
             req.session.user = null;
+            res.clearCookie('user');
             res.redirect('/');
         });
 

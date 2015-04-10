@@ -72,6 +72,12 @@ logger.token('cstDate', function () {
 // routes
 require('./routes')(app);
 
+//404
+app.get('*', function (req, res) {
+    res.render('404');
+    return;
+});
+
 
 // -----------------------------------------------------------------------------
 // listen
