@@ -44,4 +44,11 @@ create table favour(
     constraint user_favour_fk foreign key (u_name) references user(u_name) ON DELETE CASCADE
 )ENGINE = InnoDB default charset = utf8;
 
+DROP TABLE IF EXISTS message;
+create table message(
+    id int primary key auto_increment,
+    article_id int,
+    comment_id int,
+    has_read int //0 never read ,1 has read
+)ENGINE = InnoDB default charset = utf8;
 
