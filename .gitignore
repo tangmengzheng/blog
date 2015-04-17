@@ -32,5 +32,5 @@ node_modules
 #bower
 bower_components
 public/bower_components
-lib/db.js
-public/upload/
+db.js
+upload
