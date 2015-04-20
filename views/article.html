@@ -1,27 +1,5 @@
 <%- include  header.html %>
 
-<script>
-    function validate () {
-        var comment = document.getElementById('comment').value;
-        if (!checkUser()) {
-            return false;
-        }
-        if (!comment || !comment.length) {
-            alert("coment cant be null");
-            return false;
-        }
-        return true;
-    }
-    function checkUser () {
-        var user_start = document.cookie.indexOf('user=');
-        if (user_start == -1) {
-            alert("please login first");
-            return false;
-        }
-        return true;
-    }
-
-</script>
 
 <div>
     <% if (user && user == article.u_name) { %>
@@ -46,6 +24,15 @@
         <a id= "favour" href = "">赞</a>（ <span id ="favour_amount"><%= article.a_favour %></span> ）
     </div>
 
+    <hr/>
+
+    <div id= "postComment">
+        <form class = "form" >
+            <textarea id = "comment" name = "comment" rows = 6 style = "width:100%;" maxlength = "512" placeholder = "发表评论" oninput = "checkUser()"></textarea>
+            <button class = "btn" id = "post" type = "button" value = "提交">提交 </button>
+        </form>
+    </div>
+
     <script type = "text/javascript">
         var url = "/favour/"+ <%=  article.a_id %> + "?favour_amount="+<%= article.a_favour %>;
         $(document).ready(function () {
@@ -57,24 +44,53 @@
                 return false;
             });
         });
-    </script>
 
-    <hr/>
+        function validate () {
+            var comment = document.getElementById('comment').value;
+            if (!checkUser()) {
+                return false;
+            }
+            if (!comment || !comment.length) {
+                alert("coment cant be null");
+                return false;
+            }
+            return true;
+        }
+        function checkUser () {
+            var user_start = document.cookie.indexOf('user=');
+            if (user_start == -1) {
+                alert("please login first");
+                return false;
+            }
+            return true;
+        }
 
-    <div>
-        <form class = "form">
-            <textarea id = "comment" name = "comment" rows = 6 style = "width:100%;" maxlength = "512" placeholder = "发表评论" oninput = "checkUser()"></textarea>
-            <button class = "btn" type = "submit" value = "提交">提交 </button>
-        </form>
-    </div>
-    <script type = "text/javascript">
-        url = "/post/comment/<%= article.a_id %>";
-        $("document").ready(
-                $.post(url, null, function (data, statu) {
-                    if (!res) {
-                    }
+
+        $(document).ready(function () {
+            var url = "/post/comment/<%= article.a_id %>";
+            $("#post").click(function () {
+                if (!checkUser()) {
+                    return false;
+                }else if(!validate()){
+                    return false;
+                }else{
+                    postComment();
                 }
-        )
+            });
+            function postComment() {
+                $.post(url, {comment:$("#comment").text()}, function (data, status) {
+                    if (status != 200) {
+                        alert("comment faild");
+                        return false;
+                    }else {
+                        //$("#postComment").appendAfter('<div> <p class = ""><a herf = "#"> <%= user %></a> </p> <article class = "" style = "text-indent:2em">$("#comment").text()</article> </div> <hr/> ');
+                        $("#postComment").after("<div> Hello world</div> <hr/> ");
+                        return true;
+                    }
+                })
+            }
+        })
+
 
     </script>
 
