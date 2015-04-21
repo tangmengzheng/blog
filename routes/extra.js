@@ -42,28 +42,32 @@
             });
         });
         app.post('/post/comment/:a_id', function (req, res) {
+
+            console.log(util.inspect(req.body)+util.inspect(req.params));
             var articleId = req.params.a_id;
             var commentContent = req.body.comment;
             if (!articleId || !articleId.length) {
+                console.log('article id is null');
                 return res.status(400).send('paramete error');
             }
 
             if (!commentContent || !commentContent.length) {
+                console.log('comment is null');
                 res.status(400).send('paramete error');
                 return;
             }
 
             if (!req.session.user ) {
-                req.flash('error',"please login first");
-                return res.redirect('/login');
+                console.log('user not log in');
+                return ;
             }
             var params = {articleId : articleId,user:req.session.user,commentContent:commentContent};
             extra.postComment(params, function (err, data) {
                 if (err) {
                     console.log(err);
-                    res.status(400).send('system busy');
+                    return  res.status(400).send('system busy');
                 }
-                res.redirect('/article/'+articleId);
+                return res.send("success");
             });
         });
     }

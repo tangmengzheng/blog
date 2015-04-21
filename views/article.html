@@ -26,12 +26,12 @@
 
     <hr/>
 
-    <div id= "postComment">
-        <form class = "form" >
-            <textarea id = "comment" name = "comment" rows = 6 style = "width:100%;" maxlength = "512" placeholder = "发表评论" oninput = "checkUser()"></textarea>
-            <button class = "btn" id = "post" type = "button" value = "提交">提交 </button>
-        </form>
-    </div>
+    <form class = "form" >
+        <textarea id = "comment" name = "comment" rows = 6 style = "width:100%;" maxlength = "512" placeholder = "发表评论" oninput = "checkUser()"></textarea>
+        <button class = "btn" id = "post" type = "button" value = "提交">提交 </button>
+    </form>
+
+    <hr/>
 
     <script type = "text/javascript">
         var url = "/favour/"+ <%=  article.a_id %> + "?favour_amount="+<%= article.a_favour %>;
@@ -78,13 +78,15 @@
                 }
             });
             function postComment() {
-                $.post(url, {comment:$("#comment").text()}, function (data, status) {
-                    if (status != 200) {
+                $.post(url, {comment:$("#comment").val()}, function (data, status) {
+                    console.log(data +status);
+                    if (status != 'success') {
                         alert("comment faild");
                         return false;
                     }else {
-                        //$("#postComment").appendAfter('<div> <p class = ""><a herf = "#"> <%= user %></a> </p> <article class = "" style = "text-indent:2em">$("#comment").text()</article> </div> <hr/> ');
-                        $("#postComment").after("<div> Hello world</div> <hr/> ");
+                        $("#comments").prepend('<div> <p class = ""><a herf = "#"> <%= user %></a> </p> <article class = "" style = "text-indent:2em">'+ $("#comment").val() + '</article> </div> <div align = "right" <span>刚刚</span> <span style = "margin-left:20px"><a>回复</a></span>');
+                </div>
+                        $("#comment").val("");
                         return true;
                     }
                 })
@@ -94,14 +96,17 @@
 
     </script>
 
-    <hr/>
 
     <% if (comments) { %>
-        <div>
+        <div id = "comments" name = "comments">
             <%  for (var key in comments) { %>
                 <div>
                     <p class = ""><a herf = "#"> <%= comments[key].u_name %></a> </p>
                     <article class = "" style = "text-indent:2em"><%= comments[key].c_content %> </article>
+                </div>
+                <div align = "right">
+                    <span>2015-04-21</span>
+                    <span style = "margin-left:20px"><a>回复</a></span>
                 </div>
                 <hr/>
             <% } %>

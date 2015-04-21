@@ -5,7 +5,7 @@
     var extra = {};
 
     extra.getComments = function (args, callback) {
-        var sql = 'select c_content, u_name, create_time from comment where a_id = ?';
+        var sql = 'select c_content, u_name, create_time from comment where a_id = ? order by create_time desc';
         db.exec({
             sql : sql,
             args : [args.articleId]
