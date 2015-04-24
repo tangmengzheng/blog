@@ -25,9 +25,9 @@ create table article(
 DROP TABLE IF EXISTS comment;
 create table comment(
     c_id int auto_increment,
-    c_content tinytext not null,
+    c_content varchar(512) not null,
     a_id int not null,
-    u_name varchar(126) not null,
+    u_name varchar(128) not null,
     create_time timestamp default current_timestamp,
     constraint comment_pk primary key(c_id),
     constraint comment_article_fk foreign key(a_id) references article(a_id) on delete CASCADE,
@@ -37,7 +37,7 @@ create table comment(
 DROP TABLE IF EXISTS favour;
 create table favour(
     a_id int not null,
-    u_name varchar(126) not null,
+    u_name varchar(128) not null,
     create_time timestamp default current_timestamp,
     constraint favour_pk primary key (a_id, u_name),
     constraint article_favour_fk foreign key (a_id) references article(a_id) ON DELETE CASCADE,
@@ -49,6 +49,9 @@ create table message(
     id int primary key auto_increment,
     article_id int,
     comment_id int,
+    commender_id int,
+    reminder_id int,
+    message varchar(512),
     has_read int //0 never read ,1 has read
 )ENGINE = InnoDB default charset = utf8;
 

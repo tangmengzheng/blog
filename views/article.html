@@ -84,7 +84,7 @@
                         alert("comment faild");
                         return false;
                     }else {
-                        $("#comments").prepend('<div> <p class = ""><a herf = "#"> <%= user %></a> </p> <article class = "" style = "text-indent:2em">'+ $("#comment").val() + '</article> </div> <div align = "right" <span>刚刚</span> <span style = "margin-left:20px"><a>回复</a></span></div>');
+                        $("#comments").prepend('<div> <p class = ""><a herf = "#"> <%= user %></a> </p> <article class = "" style = "text-indent:2em">'+ $("#comment").val() + '</article> </div> <div align = "right" <span>刚刚</span> <span style = "margin-left:20px"><a>回复</a></span></div><hr/>');
                         $("#comment").val("");
                         return true;
                     }
