@@ -20,7 +20,7 @@ module.exports=function(app){
             if(err){
                 console.log(err);
             }
-            res.render('home', {articles: articles, user: req.session.user});
+            res.render('index', {articles: articles, user: req.session.user});
         });
     });
 
