@@ -82,5 +82,5 @@ app.get('*', function (req, res) {
 // -----------------------------------------------------------------------------
 // listen
 
-app.listen(80);
-console.log('blog server started on port:' + 80);
+app.listen(8000);
+console.log('blog server started on port:' + 8000);

@@ -12,19 +12,23 @@
     </head>
     <body  style="">
         <div class="container">
-            <div>
-                <ul class="nav nav-tabs" style = "font-size:17px">
-                    <li> <a href='/'>主页</a></li>
-                    <li><a href='/about'>关于</a></li>
-					<% if (user) { %>
-                        <% if(user == "root"){ %>
-					   	    <li style = "margin-right:10px"><a href="/write/article" >写博客</a></li>
-                        <% } %>
-						<li style = "margin-right:10px"><a href="/logout" > 退出</a></li>
-					<% }else { %>
-						<li style = "margin-right:10px"><a href="/login" >登录</a></li>
-					<% } %>
-                </ul>
-            </div>
+            <div class = "row">
+                <div class = "col-sm-1"></div>
+
+                <div class = "col-sm-10">
+                    <div>
+                        <ul class="nav nav-tabs" style = "font-size:17px">
+                            <li> <a href='/'>主页</a></li>
+                            <li><a href='/about'>关于</a></li>
+                            <% if (user) { %>
+                                <% if(user == "root"){ %>
+                                    <li style = "margin-right:10px"><a href="/write/article" >写博客</a></li>
+                                <% } %>
+                                <li style = "margin-right:10px"><a href="/logout" > 退出</a></li>
+                            <% }else { %>
+                                <li style = "margin-right:10px"><a href="/login" >登录</a></li>
+                            <% } %>
+                        </ul>
+                    </div>
 
 
