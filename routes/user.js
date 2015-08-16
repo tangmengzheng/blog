@@ -33,8 +33,9 @@ var crypto = require('crypto');
                 req.flash('error', "captcha is null");
                 return  res.redirect('/login');
             }
+
             if (captcha != req.session.captcha) {
-                req.flash('error', "captcha is fault");
+                req.flash('error', "验证码错误");
                 return res.redirect('/login');
             }
 
