@@ -9,7 +9,7 @@
                     var  date = new Date(articles[article].create_time); %>
                     <tr>
                         <td class = "col-sm-10"><a href = "/article/<%= articles[article].a_id %>" ><%= articles[article].a_title %> </a></td>
-                        <td align = "right"><%= date.getFullYear() %>.<%= date.getMonth() %>.<%= date.getDate() %></td>
+                        <td align = "right"><%= date.getFullYear() %>.<%= date.getMonth() + 1 %>.<%= date.getDate() %></td>
                     </tr>
                 <% } %>
                 <tr></tr>
