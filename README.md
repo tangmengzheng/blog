@@ -3,4 +3,4 @@
 
   you can register  login  and post articles(only login as root) ,view  edit favour and  comment or delete the articles .
   
-  you can vist my personnal website http://www.tangmengzheng.org to see .
+  you can vist my personnal website http://www.tangmengzheng.com to see .
